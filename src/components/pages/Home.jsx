@@ -74,8 +74,8 @@ function Home() {
   };
   const fetchUserData = async () => {
     const res = await axios.get(`https://b3bf-102-90-58-52.ngrok-free.app/api/user/`);
-    const profilePic = await fetchProfile();
-    setprofile(profile);
+    // const profilePic = await fetchProfile();
+    // setprofile(profile);
     setUserInfo(res.data);
   };
   const copyRefferLink = async () => {
