@@ -103,7 +103,6 @@ function SignIn() {
     e.preventDefault();
     try {
       if (email.trim() !== "" && username.trim() !== "" && id) {
-        // console.log();
         const res = await axios.post(`http://localhost:5000/api/user/`, {
           username,
           email,
@@ -135,7 +134,7 @@ function SignIn() {
   };
 
   useEffect(() => {
-    fetchUserData();
+    // fetchUserData();
     return () => {
       clearTimeout(timer);
     };

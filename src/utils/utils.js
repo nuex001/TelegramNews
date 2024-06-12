@@ -1,15 +1,16 @@
 export function formatNumber(num) {
   if (num >= 1e9) {
-    return (num / 1e9).toFixed(1).replace(/\.0$/, '') + 'B';
+    return (num / 1e9).toFixed(3).replace(/\.0+$/, "") + "B";
   }
   if (num >= 1e6) {
-    return (num / 1e6).toFixed(1).replace(/\.0$/, '') + 'M';
+    return (num / 1e6).toFixed(3).replace(/\.0+$/, "") + "M";
   }
   if (num >= 1e3) {
-    return (num / 1e3).toFixed(1).replace(/\.0$/, '') + 'K';
+    return (num / 1e3).toFixed(3).replace(/\.0+$/, "") + "K";
   }
   return num.toString();
 }
+
 export const selectStyle = {
   control: (base, state) => ({
     ...base,
@@ -84,26 +85,26 @@ export const selectStyle = {
 import { toast } from "react-toastify";
 
 export const errorMsgs = (e) =>
-    toast(e, {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      type: "error",
-      theme: "dark",
-    });
- export const successMsg = (e) =>
-    toast(e, {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      type: "success",
-      theme: "dark",
-    });
+  toast(e, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+    type: "error",
+    theme: "dark",
+  });
+export const successMsg = (e) =>
+  toast(e, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+    type: "success",
+    theme: "dark",
+  });

@@ -13,13 +13,69 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import WebApp from "@twa-dev/sdk";
+
 function Home() {
   const [userInfo, setUserInfo] = useState(null);
+  const [profile, setprofile] = useState(null);
   const navigate = useNavigate();
 
+  const fetchProfile = async () => {
+    try {
+      const tg = WebApp;
+
+      // Access initDataUnsafe
+      const initDataUnsafe = tg.initDataUnsafe;
+      const user = initDataUnsafe?.user;
+      if (user) {
+        const { id } = user;
+
+        // Fetch user's profile photo
+        const response = await axios.get(
+          `https://api.telegram.org/bot${
+            import.meta.env.VITE_TELEGRAM_BOT_TOKEN
+          }/getUserProfilePhotos`,
+          {
+            params: {
+              user_id: id,
+              limit: 1, // Fetch only the first profile photo
+            },
+          }
+        );
+
+        const photos = response.data.result.photos;
+        if (photos.length > 0) {
+          // Get the largest version of the first photo
+          const photo = photos[0][photos[0].length - 1];
+          const fileId = photo.file_id;
+
+          // Fetch the file URL
+          const fileResponse = await axios.get(
+            `https://api.telegram.org/bot${
+              import.meta.env.VITE_TELEGRAM_BOT_TOKEN
+            }/getFile`,
+            {
+              params: {
+                file_id: fileId,
+              },
+            }
+          );
+
+          const filePath = fileResponse.data.result.file_path;
+          const profilePhotoUrl = `https://api.telegram.org/file/bot${
+            import.meta.env.VITE_TELEGRAM_BOT_TOKEN
+          }/${filePath}`;
+          return profilePhotoUrl;
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const fetchUserData = async () => {
     const res = await axios.get(`http://localhost:5000/api/user/`);
-    // console.log(res.data);
+    const profilePic = await fetchProfile();
+    setprofile(profile);
     setUserInfo(res.data);
   };
   const copyRefferLink = async () => {
@@ -42,7 +98,7 @@ function Home() {
   return (
     <div className="home">
       <ToastContainer />
-      <img src={dp} alt="" />
+      <img src={profile ? profile : dp} alt="" />
       <h1>{userInfo && userInfo.username}</h1>
       {/* <h3>NuelYoungteck@gmail.com</h3> */}
       <h2>

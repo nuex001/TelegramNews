@@ -22,7 +22,9 @@
   gap: 4em;
   margin-top: 1em;
 }
-.addnews form input[type="text"] {
+.addnews form input[type="text"],
+.addnews form input[type="number"],
+.addnews form input[type="url"] {
   font-family: "Lexend", sans-serif;
   width: 100%;
   height: 50px;
@@ -33,6 +35,17 @@
   border-radius: 5px;
   background: var(--header);
   border: none;
+}
+/* Chrome, Safari, Edge, Opera */
+.addnews form input::-webkit-outer-spin-button,
+.addnews form input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.addnews form input[type="number"] {
+  -moz-appearance: textfield;
 }
 .addnews form textarea {
   font-family: "Lexend", sans-serif;
@@ -181,13 +194,27 @@
   justify-content: center;
   align-items: center;
 }
-.review .empty .icon{
+.review .empty .icon {
   font-size: 15em;
   color: var(--text);
 }
-.review .empty h1{
+.review .empty h1 {
   font-size: 2em;
   color: var(--text);
   text-align: center;
   margin-top: 1.5em;
+}
+
+/* ADMIN */
+.addnews.admin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.addnews.admin h1 {
+  font-size: 3em;
+}
+.addnews.admin form {
+  margin-top: 5em;
 }

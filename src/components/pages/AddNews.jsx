@@ -128,6 +128,28 @@ function AddNews() {
     }
   };
 
+  // updateUser
+  const updateUser = async (e) => {
+    e.preventDefault();
+    const type = e.target.getAttribute("data-type");
+    const username = formRef.current.username.value;
+    try {
+      const res = await axios.put(`http://localhost:5000/api/user/`, {
+        username: username,
+        status: type,
+      });
+      successMsg(res.data.msg);
+    } catch (error) {
+      // console.log(error);
+      if (error.response.data.err) {
+        errorMsgs(error.response.data.err);
+      } else {
+        console.log(error);
+        errorMsgs("Server Error");
+      }
+    }
+  };
+
   useEffect(() => {
     setRole(localStorage.getItem("role"));
     if (localStorage.getItem("role") === "reviewer") {
@@ -180,43 +202,62 @@ function AddNews() {
             </div>
           </form>
         </div>
-      ) : (
-        role === "reviewer" && (
-          <div className="review">
-            <ToastContainer />
-            <h1>Review News</h1>
-            {posts.length > 0 ? (
-              <div className="rows">
-                {posts &&
-                  posts.map((item, idx) => (
-                    <div className="box" key={idx}>
-                      <div
-                        className="display"
-                        style={{ backgroundImage: `url(${item.cover})` }}
-                      ></div>
-                      <h2>{item.title}</h2>
-                      <h2>Category: {item.category}</h2>
-                      <p>{item.text}</p>
-                      <div className="btns">
-                        <button data-id={item._id} onClick={decline}>
-                          Decline
-                        </button>
-                        <button data-id={item._id} onClick={approve}>
-                          Approve
-                        </button>
-                      </div>
+      ) : role === "reviewer" ? (
+        <div className="review">
+          <ToastContainer />
+          <h1>Review News</h1>
+          {posts.length > 0 ? (
+            <div className="rows">
+              {posts &&
+                posts.map((item, idx) => (
+                  <div className="box" key={idx}>
+                    <div
+                      className="display"
+                      style={{ backgroundImage: `url(${item.cover})` }}
+                    ></div>
+                    <h2>{item.title}</h2>
+                    <h2>Category: {item.category}</h2>
+                    <p>{item.text}</p>
+                    <div className="btns">
+                      <button data-id={item._id} onClick={decline}>
+                        Decline
+                      </button>
+                      <button data-id={item._id} onClick={approve}>
+                        Approve
+                      </button>
                     </div>
-                  ))}
-              </div>
-            ) : (
-              <div className="empty">
-                <ImCrying2 className='icon'/>
-                <h1>Sorry No new post!</h1>
-                </div>
-            )}
-          </div>
-        )
-      )}
+                  </div>
+                ))}
+            </div>
+          ) : (
+            <div className="empty">
+              <ImCrying2 className="icon" />
+              <h1>Sorry No new post!</h1>
+            </div>
+          )}
+        </div>
+      ) : role === "admin" ? (
+        <div className="addnews admin">
+          <ToastContainer />
+          <h1>Add Reviewer</h1>
+          <form action="" ref={formRef}>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="username"
+            />
+            <div className="controls">
+              <button data-type="remove" onClick={updateUser}>
+                Remove
+              </button>
+              <button data-type="add" onClick={updateUser}>
+                Add
+              </button>
+            </div>
+          </form>
+        </div>
+      ) : null}
     </>
   );
 }
