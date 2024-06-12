@@ -103,12 +103,15 @@ function SignIn() {
     e.preventDefault();
     try {
       if (email.trim() !== "" && username.trim() !== "" && id) {
-        const res = await axios.post(`https://telegramnews.onrender.com/api/user/`, {
-          username,
-          email,
-          id,
-          referId,
-        });
+        const res = await axios.post(
+          `https://b3bf-102-90-58-52.ngrok-free.app/api/user/`,
+          {
+            username,
+            email,
+            id,
+            referId,
+          }
+        );
         localStorage.setItem("token", res.data.jwt);
         localStorage.setItem("role", res.data.role);
         localStorage.setItem("myId", res.data.myId);
@@ -134,7 +137,11 @@ function SignIn() {
   };
 
   useEffect(() => {
-    fetchUserData();
+    if (localStorage.getItem("token")) {
+      navigate("/");
+    }else{
+      fetchUserData();
+    }
     return () => {
       clearTimeout(timer);
     };
