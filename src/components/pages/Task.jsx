@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 function Task() {
   const formRef = useRef(null);
   const [role, setRole] = useState(null);
-  const [tasks, setTasks] = useState(false);
+  const [tasks, setTasks] = useState([]);
   const [userId, setUserId] = useState(6393211028);
   const [timer, setTimer] = useState(null);
   const [clickedTasks, setClickedTasks] = useState([]);
@@ -21,7 +21,9 @@ function Task() {
   // FECTH Tasks
   const fetchTasks = async () => {
     try {
-      const res = await axios.get("https://b3bf-102-90-58-52.ngrok-free.app/api/task/");
+      const res = await axios.get(
+        "https://telegramnews.onrender.com/api/task/"
+      );
       // console.log(res.data);
       setTasks(res.data);
     } catch (error) {
@@ -65,9 +67,12 @@ function Task() {
     const taskId = e.target.getAttribute("data-id");
     const granny = e.target.parentNode;
     console.log(granny);
-    const res = await axios.put(`https://b3bf-102-90-58-52.ngrok-free.app/api/task/${taskId}`, {
-      userId,
-    });
+    const res = await axios.put(
+      `https://telegramnews.onrender.com/api/task/${taskId}`,
+      {
+        userId,
+      }
+    );
     successMsg(res.data.msg);
     granny.remove();
   };
@@ -77,7 +82,7 @@ function Task() {
     const formData = new FormData(formRef.current);
     try {
       const res = await axios.post(
-        "https://b3bf-102-90-58-52.ngrok-free.app/api/task/",
+        "https://telegramnews.onrender.com/api/task/",
         formData,
         {
           headers: {
@@ -125,6 +130,7 @@ function Task() {
         {role !== "admin" ? (
           <ul className="task-list">
             {tasks &&
+              tasks.length > 0 &&
               tasks.map((task, idx) => (
                 <li className="task-list__item" key={idx}>
                   <div className="task-list__item-content">
