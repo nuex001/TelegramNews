@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 5000;
 app.use(upload({ useTempFiles: true }));
 app.use(express.json());
 const corsOptions = {
-  origin: '*',
+  origin: 'https://tonsocail.netlify.app/',
   optionsSuccessStatus: 200
 };
 
