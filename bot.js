@@ -3,10 +3,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const upload = require("express-fileupload");
 require("dotenv").config();
-const cors = require('cors');
+const cors = require("cors");
 
-
-// 
+//
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const app = express();
 // Middleware to parse JSON requests
@@ -16,12 +15,13 @@ let dbURL = process.env.DBURL;
 const PORT = process.env.PORT || 5000;
 app.use(upload({ useTempFiles: true }));
 app.use(express.json());
-const corsOptions = {
-  origin: 'https://tonsocail.netlify.app/',
-  optionsSuccessStatus: 200
-};
-
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: "*", // Allow this origin
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allow these HTTP methods
+    credentials: true, // Allow cookies to be sent
+  })
+);
 
 // connecting the db
 
@@ -66,7 +66,6 @@ bot.start((ctx) => {
     }
   );
 });
-
 
 bot.launch();
 
