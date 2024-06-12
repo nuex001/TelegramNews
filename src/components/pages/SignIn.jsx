@@ -104,7 +104,7 @@ function SignIn() {
     try {
       if (email.trim() !== "" && username.trim() !== "" && id) {
         const res = await axios.post(
-          `https://b3bf-102-90-58-52.ngrok-free.app/api/user/`,
+          `https://telegramnews.onrender.com/api/user/`,
           {
             username,
             email,
