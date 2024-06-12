@@ -74,8 +74,8 @@ function Home() {
   };
   const fetchUserData = async () => {
     const res = await axios.get(`https://b3bf-102-90-58-52.ngrok-free.app/api/user/`);
-    // const profilePic = await fetchProfile();
-    // setprofile(profile);
+    const profilePic = await fetchProfile();
+    setprofile(profile);
     setUserInfo(res.data);
   };
   const copyRefferLink = async () => {
@@ -103,7 +103,7 @@ function Home() {
       {/* <h3>NuelYoungteck@gmail.com</h3> */}
       <h2>
         <span>TN</span>
-        {formatNumber(userInfo ? userInfo.point : "0")}
+        {formatNumber(userInfo && userInfo.point > 0? userInfo.point : "0")}
       </h2>
       <div className="count">
         <div className="box">
