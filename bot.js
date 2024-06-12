@@ -16,7 +16,13 @@ let dbURL = process.env.DBURL;
 const PORT = process.env.PORT || 5000;
 app.use(upload({ useTempFiles: true }));
 app.use(express.json());
-app.use(cors());
+const corsOptions = {
+  origin: '*',
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
+
 // connecting the db
 
 mongoose

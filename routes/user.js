@@ -51,10 +51,12 @@ router.post("/", async (req, res) => {
         role: user.role,
         myId: user.id,
       });
-      let refferUser = await User.findByIdAndUpdate(referId, {
-        $inc: { point: 100 },
-      });
-      console.log(refferUser);
+      // console.log(referId);
+      if (referId !== "") {
+        let refferUser = await User.findByIdAndUpdate(referId, {
+          $inc: { point: 100 },
+        });
+      }
     } else {
       // Matching the password
       await bcrypt.compare(
