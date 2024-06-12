@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Poetsen+One&display=swap");
+* {
+  box-sizing: border-box;
+  padding: 0%;
+  margin: 0%;
+  list-style: none;
+  text-decoration: none;
+  outline: none;
+}
+:root {
+  --bg: #0f0f0f;
+  --text: #ffffff;
+  --linear: linear-gradient(112.1deg, rgb(63, 76, 119) 11.4%, rgb(0, 0, 0) 70.2%);
+  --header: #000;
+  --primary: #dcd9d9;
+  --delay: 0.1s;
+}
+
+/* 
+  font-family: "Lexend", sans-serif;
+       font-family: "Lexend", sans-serif;
+*/
+::selection {
+  background: transparent;
+}
+::-moz-selection {
+  background: transparent;
+}
+
+body {
+  background: var(--bg);
+}
+.container {
+  width: 100%;
+  min-height: 100vh;
+  font-size: 10px;
+  position: relative;
+  background: var(--bg);
+  font-family: "Lexend", sans-serif;
+  font-size: 10px;
+}
+.sketch-loading-container {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999999;
+}
+
+.sketch-loading-svg {
+  width: 250px;
+  height: 200px;
+  /* border: 2px solid var(--text); */
+}
+
+.sketch-loading-svg .sketch-loading-text {
+  font-size: 100px;
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1;
+  stroke-dasharray: 800; /* Adjusted to match new text size */
+  stroke-dashoffset: 800; /* Adjusted to match new text size */
+  animation: draw 3s ease-in forwards, filling 3s ease-in forwards;
+}
+
+.sketch-loading-container .sketch-loading-svg2 {
+  color: var(--text);
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 0.5; /* Adjusted stroke width for smaller font size */
+  stroke-dasharray: 150; /* Adjusted for smaller font size */
+  stroke-dashoffset: 150; /* Adjusted for smaller font size */
+  animation: draw 3s ease-in forwards, filling 3s ease-in forwards;
+}
+
+.sketch-loading-container p {
+  color: var(--text);
+  opacity: 0.7;
+  fill: none;
+  stroke: var(--text);
+  stroke-width: 1;
+  stroke-dasharray: 800; /* Adjusted to match new text size */
+  stroke-dashoffset: 800; /* Adjusted to match new text size */
+  animation: draw 5s ease-in forwards, filling 5s ease-in forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes filling {
+  0%,
+  90% {
+    fill: var(--text);
+    fill-opacity: 0;
+  }
+  100% {
+    fill: var(--text);
+    fill-opacity: 1;
+  }
+}
+
+.container nav {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 5;
+  left: 0%;
+  bottom: 0%;
+  padding-bottom: 2em;
+  border-radius: 20px;
+  background: var(--bg);
+}
+.container nav ul{
+  width: 80%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6em;
+  border-radius: 20px;
+  background: var(--text);
+}
+.container nav a {
+  font-size: 2.4em;
+  color: var(--bg);
+  outline: none;
+  box-shadow: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: 500ms ease-in-out;
+}
+.container nav a.active {
+  color: var(--text);
+  background: var(--bg);
+}
+.container nav a.create {
+  position: relative;
+  z-index: 6;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-top: -2em;
+  color: var(--primary);
+  background: var(--bg);
+}
+.container nav a.active.create {
+  color: var(--text);
+}

@@ -1,0 +1,98 @@
+.container .task {
+  width: 100%;
+  height: 100vh;
+  padding: 2em 2em;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: var(--text);
+}
+.container .task .LogoIcon {
+  font-size: 6em;
+}
+.container .task h1:first-child {
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--text);
+  /* background: var(--header); */
+}
+.container .task h1 {
+  text-align: center;
+  font-size: 3em;
+  margin: 0.5em auto;
+}
+.container .task h2 {
+  font-size: 1.4em;
+  text-align: center;
+  margin: 1em auto;
+  opacity: 0.7;
+}
+/*  */
+.container .task .task-list {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1em 0em;
+}
+.container .task .task-list .task-list__item {
+  width: 100%;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text);
+  /* border-bottom: 1px solid var(--text); */
+}
+.container .task .task-list .task-list__item-content {
+  max-width: calc(100% - 70px);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2em;
+  color: var(--text);
+}
+.container .task .task-list .task-list__item-content .task-list__icon {
+  font-size: 3em;
+}
+.container .task .task-list .task-list__item-content .task-list__title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2em;
+  font-size: 1.4em;
+  word-break: keep-all;
+  text-align: left;
+  opacity: 1;
+}
+.container
+  .task
+  .task-list
+  .task-list__item-content
+  .task-list__title
+  .task-list__bonus {
+  opacity: 0.7;
+}
+.container .task .task-list .task-list__link {
+  display: flex;
+  font-size: 1.4em;
+  color: var(--primary);
+  width: 70px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--header);
+  border-radius: 5px;
+}
+.container .task .task-list .task-list__link.claim {
+  background: var(--linear);
+}
+.container .task .task-list .task-list__item:last-child {
+  margin-bottom: 7em;
+}

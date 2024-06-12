@@ -1,0 +1,193 @@
+.addnews {
+  width: 100%;
+  min-height: 100vh;
+  font-size: 10px;
+  position: relative;
+  background: var(--bg);
+  padding: 2em 2.5em;
+  padding-bottom: 10em;
+}
+
+.addnews h1 {
+  color: var(--text);
+  font-size: 2em;
+  text-align: left;
+}
+.addnews form {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4em;
+  margin-top: 1em;
+}
+.addnews form input[type="text"] {
+  font-family: "Lexend", sans-serif;
+  width: 100%;
+  height: 50px;
+  color: var(--text);
+  outline: none;
+  font-size: 1.4em;
+  padding: 0em 1em;
+  border-radius: 5px;
+  background: var(--header);
+  border: none;
+}
+.addnews form textarea {
+  font-family: "Lexend", sans-serif;
+  width: 100%;
+  height: 200px;
+  color: var(--text);
+  outline: none;
+  font-size: 1.4em;
+  padding: 1.5em;
+  border-radius: 5px;
+  resize: none;
+  background: var(--header);
+  border: none;
+}
+.addnews form label {
+  font-family: "Lexend", sans-serif;
+  width: 100%;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+  outline: none;
+  font-size: 1.4em;
+  padding: 1.5em;
+  border-radius: 5px;
+  background: var(--header);
+}
+.addnews form label .icon {
+  font-size: 4em;
+}
+.addnews form .selectInput {
+  width: 100%;
+}
+.addnews form .controls {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+}
+.addnews form .controls button {
+  width: 100%;
+  height: 50px;
+  font-family: "Lexend", sans-serif;
+  font-size: 1.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  background: var(--text);
+  color: var(--bg);
+  border: none;
+  outline: none;
+  border-radius: 10px;
+}
+
+/* REVIEW SEC */
+
+.review {
+  width: 100%;
+  min-height: 100vh;
+  font-size: 10px;
+  position: relative;
+  background: var(--bg);
+  padding: 2em 2.5em;
+  padding-bottom: 10em;
+}
+
+.review h1 {
+  color: var(--text);
+  font-size: 2em;
+  text-align: left;
+}
+.review .rows {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4em;
+  margin-top: 2em;
+}
+.review .rows .box {
+  width: 90%;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1em;
+  border-radius: 10px;
+  border: 2px solid;
+  border-image: var(--linear) 1;
+  padding-bottom: 1em;
+  position: relative;
+}
+.review .rows .box .display {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  width: 100%;
+  height: 150px;
+}
+.review .rows .box h2 {
+  color: var(--text);
+  font-size: 1.4em;
+  margin-left: 10px;
+  margin-right: 5px;
+}
+.review .rows .box p {
+  color: var(--text);
+  font-size: 1.2em;
+  margin-left: 10px;
+  margin-right: 5px;
+}
+
+.review .rows .box .btns {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0em 1em;
+}
+.review .rows .box .btns button {
+  width: 40%;
+  height: 35px;
+  font-family: "Lexend", sans-serif;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--header);
+  color: var(--text);
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.review .empty {
+  width: 100%;
+  margin-top: 20em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.review .empty .icon{
+  font-size: 15em;
+  color: var(--text);
+}
+.review .empty h1{
+  font-size: 2em;
+  color: var(--text);
+  text-align: center;
+  margin-top: 1.5em;
+}
