@@ -21,7 +21,7 @@ function Task() {
   // FECTH Tasks
   const fetchTasks = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/task/");
+      const res = await axios.get("https://b3bf-102-90-58-52.ngrok-free.app/api/task/");
       // console.log(res.data);
       setTasks(res.data);
     } catch (error) {
@@ -65,7 +65,7 @@ function Task() {
     const taskId = e.target.getAttribute("data-id");
     const granny = e.target.parentNode;
     console.log(granny);
-    const res = await axios.put(`http://localhost:5000/api/task/${taskId}`, {
+    const res = await axios.put(`https://b3bf-102-90-58-52.ngrok-free.app/api/task/${taskId}`, {
       userId,
     });
     successMsg(res.data.msg);
@@ -77,7 +77,7 @@ function Task() {
     const formData = new FormData(formRef.current);
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/task/",
+        "https://b3bf-102-90-58-52.ngrok-free.app/api/task/",
         formData,
         {
           headers: {

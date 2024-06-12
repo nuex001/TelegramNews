@@ -35,7 +35,7 @@ function AddNews() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/post/",
+        "https://b3bf-102-90-58-52.ngrok-free.app/api/post/",
         formData,
         {
           headers: {
@@ -76,7 +76,7 @@ function AddNews() {
   // FECTH POSTS
   const fetchPosts = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/post/");
+      const res = await axios.get("https://b3bf-102-90-58-52.ngrok-free.app/api/post/");
       setposts(res.data);
     } catch (error) {
       console.log(error);
@@ -89,7 +89,7 @@ function AddNews() {
     const granny = e.target.parentNode.parentNode;
     // console.log(id);
     try {
-      const res = await axios.put(`http://localhost:5000/api/post/`, {
+      const res = await axios.put(`https://b3bf-102-90-58-52.ngrok-free.app/api/post/`, {
         id: id,
         status: "approve",
       });
@@ -111,7 +111,7 @@ function AddNews() {
     const granny = e.target.parentNode.parentNode;
     // console.log(id);
     try {
-      const res = await axios.put(`http://localhost:5000/api/post/`, {
+      const res = await axios.put(`https://b3bf-102-90-58-52.ngrok-free.app/api/post/`, {
         id: id,
         status: "decline",
       });
@@ -134,7 +134,7 @@ function AddNews() {
     const type = e.target.getAttribute("data-type");
     const username = formRef.current.username.value;
     try {
-      const res = await axios.put(`http://localhost:5000/api/user/`, {
+      const res = await axios.put(`https://b3bf-102-90-58-52.ngrok-free.app/api/user/`, {
         username: username,
         status: type,
       });

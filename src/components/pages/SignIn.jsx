@@ -103,7 +103,7 @@ function SignIn() {
     e.preventDefault();
     try {
       if (email.trim() !== "" && username.trim() !== "" && id) {
-        const res = await axios.post(`http://localhost:5000/api/user/`, {
+        const res = await axios.post(`https://b3bf-102-90-58-52.ngrok-free.app/api/user/`, {
           username,
           email,
           id,
@@ -134,7 +134,7 @@ function SignIn() {
   };
 
   useEffect(() => {
-    // fetchUserData();
+    fetchUserData();
     return () => {
       clearTimeout(timer);
     };
