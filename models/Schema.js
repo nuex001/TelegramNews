@@ -21,7 +21,7 @@ const userSchema = new Schema(
     },
     point: {
       type: Number,
-      default: 10,
+      default: 0,
     },
     react: { type: Number, default: 0 },
     post: { type: Number, default: 0 },

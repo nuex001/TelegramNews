@@ -29,7 +29,7 @@ mongoose
     console.log(err);
   });
 
-const web_link = "https://tonsocail.netlify.app/";
+const web_link = "https://tonsocail.netlify.app/sign/";
 const bot_link = "https://t.me/raffle_fairbot";
 
 bot.start((ctx) => {
