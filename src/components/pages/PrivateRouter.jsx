@@ -26,11 +26,10 @@ const PrivateRoute = () => {
 
       if (!user) {
         const formdata = {
-          username: "emmma",
-          id: 111111,
-          referId: 222222 || null,
+          username: user.username ? user.username : user.first_name,
+          id: user.id,
+          referId: referId || null,
         };
-
         dispatch(logorsign(formdata));
       } else {
         // Handle the case where user is not defined
