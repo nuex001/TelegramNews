@@ -20,7 +20,7 @@ export const logorsign = createAsyncThunk(
   async (form, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/user/`,
+        `https://telegramnews.onrender.com/api/user/`,
         form
       );
       sessionStorage.setItem("token", response.data.jwt);
@@ -37,7 +37,7 @@ export const getUser = createAsyncThunk(
   "Tnews/getUser",
   async (form, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`http://localhost:5000/api/user/`);
+      const response = await axios.get(`https://telegramnews.onrender.com/api/user/`);
       return response.data; // data is the last
     } catch (error) {
       console.log(error);
@@ -52,7 +52,7 @@ export const post = createAsyncThunk(
   async (form, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/post/",
+        "https://telegramnews.onrender.com/api/post/",
         form,
         {
           headers: {
@@ -72,7 +72,7 @@ export const fetchPosts = createAsyncThunk(
   "Tnews/fetchPosts",
   async (form, { rejectWithValue }) => {
     try {
-      const response = await axios.get("http://localhost:5000/api/post/");
+      const response = await axios.get("https://telegramnews.onrender.com/api/post/");
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -86,7 +86,7 @@ export const updatePost = createAsyncThunk(
   async (form, { rejectWithValue }) => {
     // console.log(id);
     try {
-      const response = await axios.put(`http://localhost:5000/api/post/`, form);
+      const response = await axios.put(`https://telegramnews.onrender.com/api/post/`, form);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -99,7 +99,7 @@ export const updateUser = createAsyncThunk(
   "Tnews/updateUser",
   async (form, { rejectWithValue }) => {
     try {
-      const response = await axios.put(`http://localhost:5000/api/user/`, form);
+      const response = await axios.put(`https://telegramnews.onrender.com/api/user/`, form);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -112,7 +112,7 @@ export const fetchTasks = createAsyncThunk(
   "Tnews/fetchTasks",
   async (form, { rejectWithValue }) => {
     try {
-      const response = await axios.get("http://localhost:5000/api/task/");
+      const response = await axios.get("https://telegramnews.onrender.com/api/task/");
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -126,7 +126,7 @@ export const claimTask = createAsyncThunk(
   async ({ taskId, userId }, { rejectWithValue }) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/task/${taskId}`,
+        `https://telegramnews.onrender.com/api/task/${taskId}`,
         {
           userId,
         }
@@ -144,7 +144,7 @@ export const createTask = createAsyncThunk(
   async (formData, { rejectWithValue }) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/task/",
+        "https://telegramnews.onrender.com/api/task/",
         formData,
         {
           headers: {
