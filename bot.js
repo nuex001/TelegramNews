@@ -35,7 +35,7 @@ mongoose
     console.log(err);
   });
 
-const web_link = "https://tonsocail.netlify.app/sign/";
+const web_link = "https://tonsocail.netlify.app/";
 const bot_link = "https://t.me/raffle_fairbot";
 
 bot.start((ctx) => {
@@ -45,7 +45,7 @@ bot.start((ctx) => {
   const username = ctx.from.username ? `@${ctx.from.username}` : "there";
   // Send the initial message with inline keyboard
   ctx.reply(
-    `Hey ${username}! It's TelegramNews! 🌟 Your go-to app for getting news - all the cool hackathons, memes and tokens, right in your pocket!📱\n\nNow we're rolling out our Telegram mini app! Start farming points now, and who knows what cool stuff you'll snag with them soon! 🚀\n\nGot friends? Bring 'em in! The more, the merrier! 🌱\n\nRemember: TelegramNews is where growth thrives and endless opportunities TelegramNews!`,
+    `Hey ${username}! It's TelegramNews! 🌟 Your go-to app for getting news on hackathons, memes, and tokens, right in your pocket!📱\n\We're rolling out our Telegram mini app! Start farming points now, and who knows what cool stuff you'll snag with them soon! 🚀\n\nGot friends? Bring 'em in! The more, the merrier! 🌱\n\nRemember: TelegramNews is where growth thrives and endless opportunities await!!!`,
     {
       reply_markup: {
         inline_keyboard: [
