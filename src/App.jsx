@@ -10,27 +10,16 @@ import WebApp from "@twa-dev/sdk";
 import ScrollToTop from "./components/pages/ScrollToTop";
 
 function App() {
-  const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (window.Telegram && window.Telegram.WebApp) {
       // Expand the Web App to full screen
       WebApp.expand();
-
-      // Set the background color
-      // WebApp.setBackgroundColor("#fff");
     }
-    const timeoutId = setTimeout(() => {
-      setLoading(false);
-    }, 5000);
-    // Cleanup function
-    return () => {
-      clearTimeout(timeoutId); // Clear the timeout when component unmounts
-    };
   }, []);
   return (
     <BrowserRouter>
       <div className="container">
-        {loading && (
+        {/* {loading && (
           <div className="sketch-loading-container">
             <svg viewBox="0 0 150 50" class="sketch-loading-svg">
               <text x="0" y="40" class="sketch-loading-text">
@@ -48,7 +37,7 @@ function App() {
               </text>
             </svg>
           </div>
-        )}
+        )} */}
         <ScrollToTop />
         <Routes>
           {/* <Route exact path="/sign" element={<SignIn />} /> */}
