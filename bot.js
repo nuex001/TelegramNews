@@ -69,6 +69,10 @@ bot.start((ctx) => {
 
 bot.launch();
 
+// Health check route
+app.get("/", (req, res) => {
+  res.status(200).send("OK");
+});
 // ROUTES
 app.use("/api/user", require("./routes/user"));
 app.use("/api/post", require("./routes/post"));
