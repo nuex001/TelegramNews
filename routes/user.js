@@ -44,11 +44,13 @@ router.post("/", async (req, res) => {
         },
       };
       const token = createToken(payload);
+      const userResponse = user.toObject();
+      delete userResponse.password;
       res.json({
-        msg: "Registered Successfully",
         jwt: token,
         role: user.role,
         myId: user.id,
+        user: userResponse,
       });
       // console.log(referId);
       if (referId !== "") {
@@ -101,11 +103,13 @@ router.post("/", async (req, res) => {
               },
             };
             const token = createToken(payload);
+            const userResponse = user.toObject();
+            delete userResponse.password;
             res.json({
-              msg: `Logged Successfully`,
               jwt: token,
               role: user.role,
               myId: user.id,
+              user: userResponse,
             });
           } else {
             console.log(err);
@@ -153,7 +157,6 @@ router.put("/", auth, async (req, res) => {
 
 // GET USER INFO
 router.get("/", auth, async (req, res) => {
-  console.log("Dfdffddf");
   try {
     const { id } = req.user;
     const user = await User.findById(id).select("-password");
