@@ -24,7 +24,7 @@ const PrivateRoute = () => {
         "referrerId"
       );
 
-      if (!user) {
+      if (user) {
         const formdata = {
           username: user.username ? user.username : user.first_name,
           id: user.id,
