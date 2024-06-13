@@ -25,15 +25,14 @@ const createToken = (payload) => {
 // Working for register users
 router.post("/", async (req, res) => {
   // console.log(req.body);
-  const { username, email, id, referId } = req.body;
+  const { username, id, referId } = req.body;
   let token;
   try {
-    let user = await User.findOne({ email });
+    let user = await User.findOne({ username });
     //   Checking if user is null
     if (!user) {
       const user = new User({
         username: username.toLowerCase(),
-        email,
         password: id,
       });
       await user.save();
@@ -156,6 +155,7 @@ router.put("/", auth, async (req, res) => {
 
 // GET USER INFO
 router.get("/", auth, async (req, res) => {
+  console.log("Dfdffddf");
   try {
     const { id } = req.user;
     const user = await User.findById(id).select("-password");
