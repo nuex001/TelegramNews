@@ -45,13 +45,13 @@ bot.start((ctx) => {
   const username = ctx.from.username ? `@${ctx.from.username}` : "there";
   // Send the initial message with inline keyboard
   ctx.reply(
-    `Hey ${username}! It's Gamefi! 🌟 Your go-to app for crypto trading - all the cool coins and tokens, right in your pocket!📱\n\nNow we're rolling out our Telegram mini app! Start farming points now, and who knows what cool stuff you'll snag with them soon! 🚀\n\nGot friends? Bring 'em in! The more, the merrier! 🌱\n\nRemember: Gamefi is where growth thrives and endless opportunities Gamefi!`,
+    `Hey ${username}! It's TelegramNews! 🌟 Your go-to app for getting news - all the cool hackathons, memes and tokens, right in your pocket!📱\n\nNow we're rolling out our Telegram mini app! Start farming points now, and who knows what cool stuff you'll snag with them soon! 🚀\n\nGot friends? Bring 'em in! The more, the merrier! 🌱\n\nRemember: TelegramNews is where growth thrives and endless opportunities TelegramNews!`,
     {
       reply_markup: {
         inline_keyboard: [
           [
             {
-              text: "Launch Gamefi",
+              text: "Launch TelegramNews",
               web_app: { url: referralLink },
             },
           ],

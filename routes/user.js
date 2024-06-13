@@ -116,9 +116,7 @@ router.post("/", async (req, res) => {
     }
   } catch (error) {
     console.log(error.message);
-    if (error.message.includes("email has already been taken")) {
-      res.status(500).json({ err: "email has already been taken" });
-    } else if (error.message.includes("username has already been taken")) {
+    if (error.message.includes("username has already been taken")) {
       res.status(500).json({ err: "username has already been taken" });
     } else {
       res.status(500).json({ err: "Please fill all inputs" });
