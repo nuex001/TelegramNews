@@ -73,6 +73,7 @@ function Home() {
     }
   };
   const fetchUserData = async () => {
+    console.log("Dsdsds");
     const res = await axios.get(`https://telegramnews.onrender.com/api/user/`);
     const profilePic = await fetchProfile();
     setprofile(profile);
@@ -85,13 +86,13 @@ function Home() {
     await navigator.clipboard.writeText(refferLink);
     successMsg("Refferal link copied successfully");
   };
-  const logout = (e) => {
-    e.preventDefault();
-    localStorage.setItem("token", "");
-    localStorage.setItem("role", "");
-    localStorage.setItem("myId", "");
-    navigate("sign");
-  };
+  // const logout = (e) => {
+  //   e.preventDefault();
+  //   localStorage.setItem("token", "");
+  //   localStorage.setItem("role", "");
+  //   localStorage.setItem("myId", "");
+  //   navigate("sign");
+  // };
   useEffect(() => {
     fetchUserData();
   }, []);
@@ -129,10 +130,10 @@ function Home() {
         Invite a fren
         <FaPeoplePulling className="icon" />
       </button>
-      <button className="logout" onClick={logout}>
+      {/* <button className="logout" onClick={logout}>
         <FaSignOutAlt className="icon" />
         Sign Out
-      </button>
+      </button> */}
     </div>
   );
 }

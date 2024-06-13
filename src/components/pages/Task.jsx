@@ -108,11 +108,11 @@ function Task() {
   };
 
   useEffect(() => {
-    setRole(localStorage.getItem("role"));
-    if (localStorage.getItem("role") !== "admin") {
+    setRole(sessionStorage.getItem("role"));
+    if (sessionStorage.getItem("role") !== "admin") {
       fetchTasks();
       fetchuserId();
-      setRole(localStorage.getItem("role"));
+      setRole(sessionStorage.getItem("role"));
     }
     return () => {
       clearTimeout(timer);

@@ -51,7 +51,7 @@ function App() {
         )}
         <ScrollToTop />
         <Routes>
-          <Route exact path="/sign" element={<SignIn />} />
+          {/* <Route exact path="/sign" element={<SignIn />} /> */}
           <Route element={<PrivateRouter />}>
             <Route exact path="/" element={<Home />} />
             <Route exact path="/task" element={<Task />} />

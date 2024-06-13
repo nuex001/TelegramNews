@@ -151,8 +151,8 @@ function AddNews() {
   };
 
   useEffect(() => {
-    setRole(localStorage.getItem("role"));
-    if (localStorage.getItem("role") === "reviewer") {
+    setRole(sessionStorage.getItem("role"));
+    if (sessionStorage.getItem("role") === "reviewer") {
       fetchPosts();
     }
     return () => {
