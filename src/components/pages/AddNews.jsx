@@ -10,15 +10,26 @@ import { errorMsgs, successMsg } from "../../utils/utils";
 import { useNavigate } from "react-router-dom";
 import dp from "../../assets/images/dp.jpg";
 import { ImCrying2 } from "react-icons/im";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  clear,
+  fetchPosts,
+  getUser,
+  post,
+  updatePost,
+  updateUser,
+} from "../../redux/Tnews";
+
 function AddNews() {
   const [isUploaded, setIsUploaded] = useState(false);
   const [timer, setTimer] = useState(null);
   const [role, setRole] = useState(null);
   const formRef = useRef(null);
   const [file, setFile] = useState(null);
-  const [posts, setposts] = useState(false);
-
+  //
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { posts, error, success } = useSelector((state) => state.Tnews);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -28,37 +39,13 @@ function AddNews() {
   const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(formRef.current);
-
     if (file) {
       formData.append("file", file);
     }
-
     try {
-      const res = await axios.post(
-        "https://telegramnews.onrender.com/api/post/",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      console.log(res);
-      successMsg(res.data.msg);
-      clearTimeout(timer);
-      setTimer(() =>
-        setTimeout(() => {
-          navigate("/");
-        }, 5000)
-      );
+      dispatch(post(formData));
     } catch (error) {
-      // console.log(error);
-      if (error.response.data.err) {
-        errorMsgs(error.response.data.err);
-      } else {
-        console.log(error);
-        errorMsgs("Server Error");
-      }
+      console.log(error);
     }
   };
   const cancelForm = (e) => {
@@ -73,34 +60,20 @@ function AddNews() {
     { value: "hackathons", label: "Hackathons" },
   ];
 
-  // FECTH POSTS
-  const fetchPosts = async () => {
-    try {
-      const res = await axios.get("https://telegramnews.onrender.com/api/post/");
-      setposts(res.data);
-    } catch (error) {
-      console.log(error);
-      errorMsgs("Server Error");
-    }
-  };
   //
   const approve = async (e) => {
     const id = e.target.getAttribute("data-id");
     const granny = e.target.parentNode.parentNode;
     // console.log(id);
     try {
-      const res = await axios.put(`https://telegramnews.onrender.com/api/post/`, {
-        id: id,
-        status: "approve",
-      });
-      granny.remove();
-      successMsg(res.data.msg);
-      clearTimeout(timer);
-      setTimer(() =>
-        setTimeout(() => {
-          window.location.reload();
-        }, 5000)
+      dispatch(
+        updatePost({
+          id: id,
+          status: "approve",
+        })
       );
+      granny.remove();
+      dispatch(getUser());
     } catch (error) {
       console.log(error);
     }
@@ -109,38 +82,33 @@ function AddNews() {
   const decline = async (e) => {
     const id = e.target.getAttribute("data-id");
     const granny = e.target.parentNode.parentNode;
-    // console.log(id);
     try {
-      const res = await axios.put(`https://telegramnews.onrender.com/api/post/`, {
-        id: id,
-        status: "decline",
-      });
-      granny.remove();
-      successMsg(res.data.msg);
-      clearTimeout(timer);
-      setTimer(() =>
-        setTimeout(() => {
-          window.location.reload();
-        }, 5000)
+      dispatch(
+        updatePost({
+          id: id,
+          status: "decline",
+        })
       );
+      granny.remove();
+      dispatch(getUser());
     } catch (error) {
       console.log(error);
     }
   };
 
-  // updateUser
-  const updateUser = async (e) => {
+  // update user
+  const updateuser = async (e) => {
     e.preventDefault();
     const type = e.target.getAttribute("data-type");
     const username = formRef.current.username.value;
     try {
-      const res = await axios.put(`https://telegramnews.onrender.com/api/user/`, {
-        username: username,
-        status: type,
-      });
-      successMsg(res.data.msg);
+      dispatch(
+        updateUser({
+          username: username,
+          status: type,
+        })
+      );
     } catch (error) {
-      // console.log(error);
       if (error.response.data.err) {
         errorMsgs(error.response.data.err);
       } else {
@@ -149,11 +117,24 @@ function AddNews() {
       }
     }
   };
+  //
+  useEffect(() => {
+    if (error !== null) {
+      errorMsgs(error.err);
+      dispatch(clear());
+    } else {
+      successMsg(success);
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+    }
+    dispatch(clear());
+  }, [success, error]);
 
   useEffect(() => {
     setRole(sessionStorage.getItem("role"));
     if (sessionStorage.getItem("role") === "reviewer") {
-      fetchPosts();
+      dispatch(fetchPosts());
     }
     return () => {
       clearTimeout(timer);
@@ -248,10 +229,10 @@ function AddNews() {
               placeholder="username"
             />
             <div className="controls">
-              <button data-type="remove" onClick={updateUser}>
+              <button data-type="remove" onClick={updateuser}>
                 Remove
               </button>
-              <button data-type="add" onClick={updateUser}>
+              <button data-type="add" onClick={updateuser}>
                 Add
               </button>
             </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "../../assets/css/task.css";
 import { BiSolidBadgeDollar } from "react-icons/bi";
-import { FaTelegramPlane } from "react-icons/fa";
+import { FaTelegramPlane, FaDiscord } from "react-icons/fa";
 import { FaInstagram, FaXTwitter } from "react-icons/fa6";
 import { errorMsgs, successMsg } from "../../utils/utils";
 import WebApp from "@twa-dev/sdk";
@@ -10,27 +10,29 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  clear,
+  createTask,
+  fetchTasks,
+  getUser,
+  post,
+  updateUser,
+  claimTask,
+} from "../../redux/Tnews";
+
 function Task() {
   const formRef = useRef(null);
   const [role, setRole] = useState(null);
-  const [tasks, setTasks] = useState([]);
+  // const [tasks, setTasks] = useState([]);
   const [userId, setUserId] = useState(6393211028);
   const [timer, setTimer] = useState(null);
   const [clickedTasks, setClickedTasks] = useState([]);
+  //
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  // FECTH Tasks
-  const fetchTasks = async () => {
-    try {
-      const res = await axios.get(
-        "https://telegramnews.onrender.com/api/task/"
-      );
-      // console.log(res.data);
-      setTasks(res.data);
-    } catch (error) {
-      console.log(error);
-      errorMsgs("Server Error");
-    }
-  };
+  const { tasks, error, success } = useSelector((state) => state.Tnews);
+
   // FECTH Tasks
   const fetchuserId = async () => {
     try {
@@ -61,19 +63,13 @@ function Task() {
     // Open the link in a new tab
     window.open(link, "_blank", "noopener,noreferrer");
   };
+
   // Claim Task
-  const claimTask = async (e) => {
+  const claimtask = async (e) => {
     e.preventDefault();
     const taskId = e.target.getAttribute("data-id");
     const granny = e.target.parentNode;
-    console.log(granny);
-    const res = await axios.put(
-      `https://telegramnews.onrender.com/api/task/${taskId}`,
-      {
-        userId,
-      }
-    );
-    successMsg(res.data.msg);
+    dispatch(claimTask({ taskId, userId }));
     granny.remove();
   };
 
@@ -81,19 +77,9 @@ function Task() {
     e.preventDefault();
     const formData = new FormData(formRef.current);
     try {
-      const res = await axios.post(
-        "https://telegramnews.onrender.com/api/task/",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
-      successMsg(res.data.msg);
-      formRef.current.reset();
+      dispatch(createTask(formData));
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       if (error.response.data.err) {
         errorMsgs(error.response.data.err);
       } else {
@@ -110,14 +96,28 @@ function Task() {
   useEffect(() => {
     setRole(sessionStorage.getItem("role"));
     if (sessionStorage.getItem("role") !== "admin") {
-      fetchTasks();
+      dispatch(fetchTasks());
       fetchuserId();
-      setRole(sessionStorage.getItem("role"));
     }
     return () => {
       clearTimeout(timer);
     };
   }, []);
+
+  //
+  useEffect(() => {
+    if (error !== null) {
+      errorMsgs(error.err);
+      dispatch(clear());
+    } else {
+      successMsg(success);
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+    }
+    dispatch(clear());
+  }, [success, error]);
+
   return (
     <>
       <div className="task">
@@ -134,10 +134,36 @@ function Task() {
               tasks.map((task, idx) => (
                 <li className="task-list__item" key={idx}>
                   <div className="task-list__item-content">
-                    <BiSolidBadgeDollar
-                      className="task-list__icon"
-                      aria-hidden="true"
-                    />
+                    {task.description.includes("telegram") ? (
+                      <FaTelegramPlane
+                        className="task-list__icon"
+                        aria-hidden="true"
+                        style={{color:"#0088cc"}}
+                      />
+                    ) : task.description.includes("twitter") ? (
+                      <FaXTwitter
+                        className="task-list__icon"
+                        aria-hidden="true"
+                        style={{color:"#fff"}}
+                      />
+                    ) : task.description.includes("discord") ? (
+                      <FaDiscord
+                        className="task-list__icon"
+                        aria-hidden="true"
+                        style={{color:"#5865F2"}}
+                      />
+                    ) : task.description.includes("instgram") ? (
+                      <FaInstagram
+                        className="task-list__icon"
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <BiSolidBadgeDollar
+                        className="task-list__icon"
+                        aria-hidden="true"
+                      />
+                    )}
+
                     <h2 className="task-list__title">
                       {task.description}{" "}
                       <span className="task-list__bonus">
@@ -149,7 +175,7 @@ function Task() {
                     <a
                       className="task-list__link claim"
                       aria-label="Claim task"
-                      onClick={claimTask}
+                      onClick={claimtask}
                       data-id={task._id}
                     >
                       Claim

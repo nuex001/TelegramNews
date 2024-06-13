@@ -14,11 +14,14 @@ import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import WebApp from "@twa-dev/sdk";
+import { useSelector,useDispatch } from "react-redux";
+import { getUser } from "../../redux/Tnews";
 
 function Home() {
-  const [userInfo, setUserInfo] = useState(null);
   const [profile, setprofile] = useState(null);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { user } = useSelector((state) => state.Tnews);
 
   const fetchProfile = async () => {
     try {
@@ -72,12 +75,6 @@ function Home() {
       console.error(error);
     }
   };
-  const fetchUserData = async () => {
-    const res = await axios.get(`https://telegramnews.onrender.com/api/user/`);
-    const profilePic = await fetchProfile();
-    setprofile(profile);
-    setUserInfo(res.data);
-  };
   const copyRefferLink = async () => {
     const id = localStorage.getItem("myId");
     // console.log(id);
@@ -85,44 +82,41 @@ function Home() {
     await navigator.clipboard.writeText(refferLink);
     successMsg("Refferal link copied successfully");
   };
-  // const logout = (e) => {
-  //   e.preventDefault();
-  //   localStorage.setItem("token", "");
-  //   localStorage.setItem("role", "");
-  //   localStorage.setItem("myId", "");
-  //   navigate("sign");
-  // };
+ 
   useEffect(() => {
-    fetchUserData();
+    // console.log(user);
+    if (!user) {
+    dispatch(getUser());
+    }
   }, []);
   return (
     <div className="home">
       <ToastContainer />
       <img src={profile ? profile : dp} alt="" />
-      <h1>{userInfo && userInfo.username}</h1>
+      <h1>{user && user.username}</h1>
       {/* <h3>NuelYoungteck@gmail.com</h3> */}
       <h2>
         <span>TN</span>
-        {formatNumber(userInfo && userInfo.point > 0? userInfo.point : "0")}
+        {formatNumber(user && user.point > 0? user.point : "0")}
       </h2>
       <div className="count">
         <div className="box">
           <BsPatchPlus className="icon post" />
-          <h4>{userInfo && userInfo.post}</h4>
+          <h4>{user && user.post}</h4>
         </div>
         <div className="box">
           <FaSmile className="icon reaction" />
-          <h4>{userInfo && userInfo.react}</h4>
+          <h4>{user && user.react}</h4>
         </div>
       </div>
       <div className="count">
         <div className="box">
           <BsFillCalendarCheckFill className="icon calendar" />
-          <h4>{userInfo && userInfo.loginCounts}</h4>
+          <h4>{user && user.loginCounts}</h4>
         </div>
         <div className="box">
           <FaFire className="icon streak" />
-          <h4>{userInfo && userInfo.streak}</h4>
+          <h4>{user && user.streak}</h4>
         </div>
       </div>
       <button className="invite" onClick={copyRefferLink}>

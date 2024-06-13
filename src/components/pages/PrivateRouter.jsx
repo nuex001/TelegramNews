@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 import WebApp from "@twa-dev/sdk";
+import { useDispatch } from "react-redux";
+import { logorsign } from "../../redux/Tnews";
 
 const PrivateRoute = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+  // const { user } = useSelector((state) => state.investment);
   const navigate = useNavigate();
 
   const getData = (key) => {
@@ -20,20 +24,14 @@ const PrivateRoute = () => {
         "referrerId"
       );
 
-      if (user) {
+      if (!user) {
         const formdata = {
-          username: user.username ? user.username : user.first_name,
-          id: user.id,
-          referId: referId || null,
+          username: "emmma",
+          id: 111111,
+          referId: 222222 || null,
         };
 
-        const res = await axios.post(
-          `https://telegramnews.onrender.com/api/user/`,
-          formdata
-        );
-        sessionStorage.setItem("token", res.data.jwt);
-        sessionStorage.setItem("role", res.data.role);
-        sessionStorage.setItem("myId", res.data.myId);
+        dispatch(logorsign(formdata));
       } else {
         // Handle the case where user is not defined
         console.error("User data is not available");
