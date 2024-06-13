@@ -73,7 +73,6 @@ function Home() {
     }
   };
   const fetchUserData = async () => {
-    console.log("Dsdsds");
     const res = await axios.get(`https://telegramnews.onrender.com/api/user/`);
     const profilePic = await fetchProfile();
     setprofile(profile);

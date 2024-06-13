@@ -19,25 +19,6 @@ function App() {
   return (
     <BrowserRouter>
       <div className="container">
-        {/* {loading && (
-          <div className="sketch-loading-container">
-            <svg viewBox="0 0 150 50" class="sketch-loading-svg">
-              <text x="0" y="40" class="sketch-loading-text">
-                TN
-              </text>
-            </svg>
-            <svg viewBox="0 0 200 20" class="sketch-loading-svg2">
-              <text x="60" y="13" class="sketch-loading-text" font-size="10px">
-                Telegram News
-              </text>
-            </svg>
-            <svg viewBox="0 0 200 20" class="sketch-loading-svg2">
-              <text x="12" y="13" class="sketch-loading-text" font-size="6px">
-                We here to serve you the best and top news here on telegram
-              </text>
-            </svg>
-          </div>
-        )} */}
         <ScrollToTop />
         <Routes>
           {/* <Route exact path="/sign" element={<SignIn />} /> */}
