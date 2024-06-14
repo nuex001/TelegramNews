@@ -78,7 +78,7 @@ function Home() {
   const copyRefferLink = async () => {
     const id = sessionStorage.getItem("myId");
     // console.log(id);
-    const refferLink = `https://t.me/raffle_fairbot?start=${id}`;
+    const refferLink = `https://t.me/News_Pointsbot?start=${id}`;
     await navigator.clipboard.writeText(refferLink);
     successMsg("Refferal link copied successfully");
   };
