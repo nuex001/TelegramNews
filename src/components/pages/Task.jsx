@@ -123,7 +123,7 @@ function Task() {
       <div className="task">
         <ToastContainer />
         <h1>NP</h1>
-        <h1>1 task available</h1>
+        <h1>{tasks ? tasks.length : "0"} task available</h1>
         <h2>
           We’ll reward you immediately with points after each task completion.
         </h2>
