@@ -96,7 +96,7 @@ function Home() {
       <img src={profile ? profile : dp} alt="" />
       <h1>{user && user.username}</h1>
       <h2>
-        <span>TN</span>
+        <span>NP</span>
         {formatNumber(user && user.point > 0 ? user.point : "0")}
       </h2>
       <div className="count">

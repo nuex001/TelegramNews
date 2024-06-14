@@ -122,7 +122,7 @@ function Task() {
     <>
       <div className="task">
         <ToastContainer />
-        <h1>TN</h1>
+        <h1>NP</h1>
         <h1>1 task available</h1>
         <h2>
           We’ll reward you immediately with points after each task completion.
@@ -167,7 +167,7 @@ function Task() {
                     <h2 className="task-list__title">
                       {task.description}{" "}
                       <span className="task-list__bonus">
-                        + {task.points} TN
+                        + {task.points} NP
                       </span>
                     </h2>
                   </div>
