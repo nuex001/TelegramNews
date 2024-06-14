@@ -36,7 +36,7 @@ mongoose
   });
 
 const web_link = "https://tonsocail.netlify.app/";
-const bot_link = "https://t.me/raffle_fairbot";
+const bot_link = "https://t.me/News_Pointsbot";
 
 bot.start((ctx) => {
   const referrerId = ctx.startPayload;
@@ -45,13 +45,13 @@ bot.start((ctx) => {
   const username = ctx.from.username ? `@${ctx.from.username}` : "there";
   // Send the initial message with inline keyboard
   ctx.reply(
-    `Hey ${username}! It's TelegramNews! 🌟 Your go-to app for getting news on hackathons, memes, and tokens, right in your pocket!📱\n\We're rolling out our Telegram mini app! Start farming points now, and who knows what cool stuff you'll snag with them soon! 🚀\n\nGot friends? Bring 'em in! The more, the merrier! 🌱\n\nRemember: TelegramNews is where growth thrives and endless opportunities await!!!`,
+    `Hey ${username}! It's NewsPoints! 🌟 Your go-to app for getting news on hackathons, memes, and tokens, right in your pocket!📱\n\We're rolling out our Telegram mini app! Start farming points now, and who knows what cool stuff you'll snag with them soon! 🚀\n\nGot friends? Bring 'em in! The more, the merrier! 🌱\n\nRemember: NewsPoints is where growth thrives and endless opportunities await!!!`,
     {
       reply_markup: {
         inline_keyboard: [
           [
             {
-              text: "Launch TelegramNews",
+              text: "Launch NewsPoints",
               web_app: { url: referralLink },
             },
           ],
