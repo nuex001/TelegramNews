@@ -85,9 +85,9 @@ function Home() {
 
   useEffect(() => {
     // console.log(user);
-    if (!user) {
-      dispatch(getUser());
       fetchProfile();
+      if (!user) {
+      dispatch(getUser());
     }
   }, []);
   return (

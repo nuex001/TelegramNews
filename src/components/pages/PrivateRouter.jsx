@@ -71,7 +71,7 @@ const PrivateRoute = () => {
         </svg>
         <svg viewBox="0 0 200 20" class="sketch-loading-svg2">
           <text x="12" y="13" class="sketch-loading-text" font-size="6px">
-            We here to serve you the best and top news here on telegram
+          Here to serve you the best and top news here on telegram
           </text>
         </svg>
       </div>
