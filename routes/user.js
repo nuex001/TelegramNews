@@ -27,13 +27,12 @@ router.post("/", async (req, res) => {
   // console.log(req.body);
   const { username, id, referId } = req.body;
   let token;
-  const name = username.toLowerCase();
   try {
-    let user = await User.findOne({ name });
+    let user = await User.findOne({ username });
     //   Checking if user is null
     if (!user) {
       const user = new User({
-        username: name,
+        username: username,
         password: id,
       });
       await user.save();
