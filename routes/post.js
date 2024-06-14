@@ -31,20 +31,6 @@ const auth = require("../middleWare/auth");
 // SCHEMA
 const { User, Post } = require("../models/Schema");
 
-async function factCheckClaim(claim) {
-  const apiKey = "AIzaSyCgIGA2Q1fPjEnaS9OWgt4gVibjIRzYAsY";
-  const url = `https://factchecktools.googleapis.com/v1alpha1/claims:search?key=${apiKey}`;
-  try {
-    const response = await axios.post(url, { query: claim });
-    // const results = response.data.claims;
-    // // Process and analyze results
-    // return results;
-  } catch (error) {
-    console.error("Error fetching fact check results:", error);
-    return null;
-  }
-}
-
 // Working for users post
 router.post("/", auth, async (req, res) => {
   const { title, paragraph, category } = req.body;
