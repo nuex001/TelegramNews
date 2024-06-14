@@ -14,7 +14,7 @@ import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import WebApp from "@twa-dev/sdk";
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getUser } from "../../redux/Tnews";
 
 function Home() {
@@ -68,7 +68,7 @@ function Home() {
           const profilePhotoUrl = `https://api.telegram.org/file/bot${
             import.meta.env.VITE_TELEGRAM_BOT_TOKEN
           }/${filePath}`;
-          return profilePhotoUrl;
+          setprofile(profilePhotoUrl);
         }
       }
     } catch (error) {
@@ -76,17 +76,18 @@ function Home() {
     }
   };
   const copyRefferLink = async () => {
-    const id = localStorage.getItem("myId");
+    const id = sessionStorage.getItem("myId");
     // console.log(id);
     const refferLink = `https://t.me/raffle_fairbot?start=${id}`;
     await navigator.clipboard.writeText(refferLink);
     successMsg("Refferal link copied successfully");
   };
- 
+
   useEffect(() => {
     // console.log(user);
     if (!user) {
-    dispatch(getUser());
+      dispatch(getUser());
+      fetchProfile();
     }
   }, []);
   return (
@@ -94,10 +95,9 @@ function Home() {
       <ToastContainer />
       <img src={profile ? profile : dp} alt="" />
       <h1>{user && user.username}</h1>
-      {/* <h3>NuelYoungteck@gmail.com</h3> */}
       <h2>
         <span>TN</span>
-        {formatNumber(user && user.point > 0? user.point : "0")}
+        {formatNumber(user && user.point > 0 ? user.point : "0")}
       </h2>
       <div className="count">
         <div className="box">
